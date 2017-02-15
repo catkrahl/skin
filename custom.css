@@ -80,6 +80,7 @@ bdo[dir="rtl"] {
   unicode-bidi: bidi-override;
 }
 /*
+/*
 /* rtl-review */
 /* with specifics imports
 add [dir="rtl"] SELECTOR ([dir="ltr"] is default)
@@ -11461,3 +11462,4 @@ table.mceToolbar td {
  *
  * use class "noMirror" to avoid image flip
 */
+/*# sourceMappingURL=custom.css.map */
