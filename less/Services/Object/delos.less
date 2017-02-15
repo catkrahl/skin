@@ -18,8 +18,7 @@ div.ilCreationFormSection div.ilForm div.ilForm {
 }
 
 
-.il_ItemProperty .badge,
-.ilHeadAction .badge {
+.il_ItemProperty .badge{
 	font-size: 8px;
 	padding: 2px 4px;
 	margin-top: -1px;
@@ -32,16 +31,31 @@ div.ilCreationFormSection .form-horizontal {
 	padding-top: 1px;
 }
 
-.objBorder {
-		border-top: 1px solid #efefef;
-		border-bottom: 1px solid #efefef;
-}
 .ilObjListRow {
-	.objBorder;
-	/* background-color: @il-primary-container-bg; */
+	border-bottom: 1px solid @body-bg;
+	background-color: @il-primary-container-bg;
 }
 
 .ilObjListRow:hover {
-	background-color: #ffffff; 
-	/*  border: 1px solid #F0F0F0; */
-} 
+	background-color: lighten(@il-highlight-bg, 5%);
+}
+
+//mantis #0017866
+.table-striped {
+    border-collapse: separate;
+    > tbody > tr.ilObjListRow {
+        > td {
+            background-color: @il-primary-container-bg;
+        }
+        &:hover {
+            > td {
+                background-color: lighten(@il-highlight-bg, 5%);
+            }
+            &:nth-child(2n+1) {
+                > td {
+                    background-color: lighten(@il-highlight-bg, 5%);
+                }
+            }
+        }
+    }
+}

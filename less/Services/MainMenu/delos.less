@@ -1,27 +1,27 @@
 /* Services/MainMenu */
 .ilTopHeader {
-	position:fixed;
-	left:0;
-	right:0;
-	z-index:	@zindex-navbar-fixed;   /* see bootstrap fixed top navbar */
-	top:0;
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: @zindex-navbar-fixed;   /* see bootstrap fixed top navbar */
+	top: 0;
 	background-color: lighten(@ilMainMenuColor, 40%);
 	//#gradient > .vertical(lighten(@ilMainMenuColor, 40%), lighten(@ilMainMenuColor, 35%), 0%, 100%);
 	.reset-filter();
 	//max-width:1200px;
-	margin-left:auto;
-	margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 	/*border-bottom: 3px solid @ilMainMenuColor;*/
 }
 
 .ilBranding {
 	height: 56px;
-	padding: 3px 0px;
+	padding: 3px 0;
 }
 
 // Default navbar
 #ilTopNav {
-	margin: 0px 0 0 0px;
+	margin: -38px 0 0 65px;
 	&.navbar {
 		padding-top: 1px;
 		padding-bottom: 1px;
@@ -35,7 +35,7 @@
 		background-color: transparent;//@body-bg;//lighten(@ilMainMenuColor, 30%);
 		//#gradient > .vertical(lighten(@ilMainMenuColor, 30%), lighten(@ilMainMenuColor, 27%), 0%, 100%);
 		.reset-filter();
-		border: 0;
+		border: 0 none;
 	}
 	.dropdown-menu {
 		float: left;
@@ -53,33 +53,30 @@
 			margin: 0 0 0 10px;
 				> a {
 				margin: 0;
-				padding: 10px 10px 6px;
-				border-top: 2px solid transparent;
+				padding: 5px 10px 6px;
+				border-top: 4px solid white;
 				color: #808080;
 				&:hover,
 				&:active,
 				&:focus {
 					//outline: 0;
-					border-top: 2px solid lighten(@brand-primary, 0%);
+					//border-top: 4px solid @brand-primary;
 					//background-color: white;
-					//box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.176);
-					opacity: 1;
-					transition: border-top 1s;
+					//box-shadow: 3px 9px 9px 0px rgba(0,0,0,0.176);
 				}
 			}
 		}
 		> .active > a,
 		> .open > a {
 			&,
-
 			&:hover,
 			&:active,
 			&:focus {
 				//background-color: lighten(@ilMainMenuColor, 42%);
-				outline: 0;
-				border-top: 2px solid lighten(@brand-primary, 0%);
+				outline: 0 none;
+				border-top: 4px solid @brand-primary;
 				background-color: #fafafa;
-				box-shadow: 3px 9px 9px 0px rgba(0,0,0,0.176);
+                .box-shadow(3px 9px 9px 0px rgba(0,0,0,0.176));
 			}
 		}
 	}
@@ -113,7 +110,7 @@
 .ilTopTitle {
 	/* color: darken(@ilMainMenuColor, 20%);*/
 	float: left;
-	font-family: 'Open Sans Semibold';
+	font-weight: 600;
 	padding: 0 0 0 15px;
 	white-space: nowrap;
 	line-height: 40px;
@@ -127,7 +124,7 @@
 }
 
 input.ilOpenIDBox {
-	background: url("@{background-images-path}openid.png") no-repeat 1px 2px #FFFFFF;
+	background: url("@{background-images-path}openid.png") no-repeat 1px 2px white;
 	padding-left: 20px;
 }
 
@@ -159,20 +156,8 @@ input.ilOpenIDBox {
 	padding: 0;
 	margin-right: 14px;
 	list-style: none outside none;
-	.badge {
-		font-size: 9px;
-		padding: 2px 4px;
-		margin-top: -3px;
-		margin-left: -5px;
-		position: absolute;
-	}
-	.ilBadgeSpacer {
-		font-size: 8px;
-		padding: 0;
-		visibility: hidden;
-	}
 	.dropdown-menu {
-		background-color: lighten(@mid-gray, 10%);
+		background-color: lighten(@mid-gray, 42%);
 		border-radius: 0;
 		margin: 0;
 		color: lighten(@mid-gray, 70%);
@@ -190,20 +175,20 @@ input.ilOpenIDBox {
 		display: block;
 		position: relative;
 	}
-
 	> li > a {
 		margin-right: 1px;
 		display: block;
 		padding: 10px;
 		position: relative;
 		min-width: 40px;
+		height: 40px;
 		text-align: center;
 		background-color: lighten(@mid-gray, 20%);
 		color: lighten(@mid-gray, 70%);
 		&:hover,
 		&:active,
 		&:focus {
-			outline: 0;
+			outline: 0 none;
 			color: white;
 			text-decoration: none;
 			background-color: lighten(@mid-gray, 42%);
@@ -215,7 +200,7 @@ input.ilOpenIDBox {
 		&:hover,
 		&:active,
 		&:focus {
-			outline: 0;
+			outline: 0 none;
 			color: white;
 			text-decoration: none;
 			background-color: lighten(@mid-gray, 42%);
@@ -234,13 +219,11 @@ input.ilOpenIDBox {
 		.dropdown-menu {
 			min-width: 100%;
 			> li > a {
-				padding-left: 20px;
-				padding-right: 20px;
+				padding-left: 50px;
 			}
 		}
 	}
 }
-
 
 [dir="rtl"] #ilTopBarNav {
 	float: left;
@@ -274,40 +257,41 @@ input.ilOpenIDBox {
 
 .ilMainHeader {
 	background-color: white;
-	height: 120px;
-	border-bottom: 0px solid @body-bg;
+	height: @il-main-header-height;
+	border-bottom: @il-header-border-bottom-height solid @body-bg;
 	&.ilTopFixed {
-		top: 40px;
+		top: @il-top-bar-height;
 	}
 	> header > .row > a.navbar-brand {
-		//height: 70px;
-		height: 50px;
+		height: auto;//@il-logo-height;
 		display: inline-block;
 		padding: 0;
 		margin: 15px 15px 0;
 		> img {
-			width: 93px;
-			/* height: 50px; */
+            display: inline-block;
+			height: @il-logo-height;
+			width: @il-logo-width;
 		}
 	}
 }
 
 .ilMainMenu {
-	background-color: @body-bg;
+	background-color: white;//@body-bg;
 	&.ilTopFixed {
-		top: 160px;
-		border-bottom: 1px solid #ccc;
-    	box-shadow: 0 1px #fff;
+		// This 7px seems arbitrary, no obvious choice for variable.
+		// This is just to get the current 110px in the standard.
+		top: floor((@il-header-height - 7px));
 	}
 }
-
+					
 .dropdown-menu {
 	font-weight: normal;
-	border: none;
-	box-shadow: 3px 9px 9px 0px rgba(0,0,0,0.3);
+	border: 0 none;
+    .box-shadow(3px 9px 9px 0 rgba(0,0,0,0.3));
 	li > a {
 		padding: 3px 10px;
 		color: lighten(@mid-gray, 10%);
+		font-size: @il-font-size-dropdown;
 	}
 }
 
@@ -321,15 +305,15 @@ input.ilOpenIDBox {
 }
 
 div.ilMemberViewMainHeader {
-   background-color: #981A0A;
+   background-color: #981a0a;
 }
 
 div.ilTopMemberView {
-	text-align: center;
+	text-align: center;	
 }
 
 div.ilTopMemberView h3 {
 	padding: 0;
 	margin: 0;
-	line-height: 40px;
+	line-height: 40px;	
 }

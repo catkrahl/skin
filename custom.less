@@ -1,4 +1,4 @@
- @import "less/font.less";
+@import "less/font.less";
  /* rtl-review is this font safe for RTL languages? */
 
  /* rtl-review */
@@ -7,7 +7,7 @@
 
 bdo[dir="ltr"] { direction: ltr; unicode-bidi: bidi-override; }
 bdo[dir="rtl"] { direction: rtl; unicode-bidi: bidi-override; }
-/*
+
 /*
 /* rtl-review */
 /* with specifics imports
@@ -17,7 +17,8 @@ In theory, you should also invert shadow... but i think we could postpone this t
 All parts that aren't checked yet are actually marked with "rtl-review"
 */
 
-@bsbase: "../../../../Services/UICore/lib/bootstrap-3.2.0/less/";
+
+@bsbase: "../../Services/UICore/lib/bootstrap-3.2.0/less/";
 
 // This part should be a copy of the less/bootstrap.less file
 // containing all imports needed.
@@ -27,9 +28,10 @@ All parts that aren't checked yet are actually marked with "rtl-review"
 @import "@{bsbase}variables.less";    // original
 @import "@{bsbase}mixins.less";
 
+
 // Reset and dependencies
 @import "@{bsbase}normalize.less";
-@import "@{bsbase}print.less";
+//@import "@{bsbase}print.less";
 @import "@{bsbase}glyphicons.less";
 
 // Core CSS
@@ -74,19 +76,35 @@ All parts that aren't checked yet are actually marked with "rtl-review"
 @import "@{bsbase}utilities.less";
 @import "@{bsbase}responsive-utilities.less";
 
+// UI framework
+@uibase: "../../src/UI/templates/default/";
+@import "@{uibase}Counter/counter.less";
+@import "@{uibase}Glyph/glyph.less";
+@import "@{uibase}Panel/panel.less";
+@import "@{uibase}Card/card.less";
+@import "@{uibase}Deck/deck.less";
+
+
 @import "less/variables.less";             // customized
 
+.bg-primary {
+  color: white;
+}
 
+/* RTL review overwrite some specifics [bootstrap] styles
+ *
+ * use class "noMirror" to avoid image flip
+*/
 [dir="rtl"] img:not(.noMirror) {
     transform: scaleX(-1);
 }
 
 [dir="rtl"] *[align="left"] {
-	text-align: right !important;
+    text-align: right !important;
 }
 
 [dir="rtl"] *[align="right"] {
-	text-align: left !important;
+    text-align: left !important;
 }
 
 [dir="rtl"] .navbar-header {
@@ -157,8 +175,8 @@ All parts that aren't checked yet are actually marked with "rtl-review"
   @media (min-width: @grid-float-breakpoint) {
     float: right;
     &.navbar-right:last-child {
-		margin-right: @navbar-padding-horizontal;
-		margin-left: 0;
+        margin-right: @navbar-padding-horizontal;
+        margin-left: 0;
     }
   }
 }
@@ -184,7 +202,7 @@ All parts that aren't checked yet are actually marked with "rtl-review"
 
 // warning inline text
 span.ilAlert {
-	color: @brand-warning;
+    color: @brand-warning;
 }
 
 //== Navs
@@ -193,181 +211,178 @@ span.ilAlert {
 
 // The dropdown menu (ul)
 .dropdown-menu {
-	background-color: #fafafa;
-	// Links within the dropdown menu
-	li > a {
-		display: block;
-		padding: 3px 20px;
-		clear: both;
-		font-weight: normal;
-		line-height: @line-height-base;
-		color: @dropdown-link-color;
-		white-space: nowrap // prevent links from randomly breaking onto new lines
-	}
+    background-color: #fafafa;
+    // Links within the dropdown menu
+    li > a {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: normal;
+        line-height: @line-height-base;
+        color: @dropdown-link-color;
+        white-space: nowrap // prevent links from randomly breaking onto new lines
+    }
 }
 [dir="rtl"] .dropdown-menu {
-	padding: 5px 0;
+    padding: 5px 0;
 }
 .yamm .dropdown-menu {
-	li > a {
-		white-space: normal;
-	}
+    li > a {
+        white-space: normal;
+    }
 }
 
 .btn-group.open .dropdown-toggle {
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    .box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.05));
 }
 
 .dropdown-header {
-	background-color: #f3f3f3;
+    background-color: #f3f3f3;
 }
 
 .dropdown-menu img {
-	border: 0;
-	width: 22px;
-	height: 22px;
-	margin: 0 3px 0 0;
-}
-
-#ilAdvSelListTable_socialbm_actions {
-	&.dropdown-menu img {
-		width: auto;
-		height: auto;
-	}
+    border: 0;
+    width: 22px;
+    height: 22px;
+    margin: 0 3px 0 0;
+    display: @il-nav-icons;
 }
 
 // must be like dropdown-menu img
 .ilAdvNoImg {
-	display: inline-block;
-	width: 22px;
+    display: inline-block;
+    width: 22px;
 }
 
 // Hover/Focus state
 .dropdown-menu li > a {
-	&:hover,
-	&:focus {
-		text-decoration: none;
-		color: @dropdown-link-hover-color;
-		background-color: @dropdown-link-hover-bg;
-	}
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: @dropdown-link-hover-color;
+        background-color: @dropdown-link-hover-bg;
+    }
 }
 
 /* BS tables */
 .table {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 
 /* ILIAS part candidates */
 
 html, body {
-	height:100%;
+    height:100%;
+}
+
+/* see bug ILIAS bug #17589 and http://stackoverflow.com/questions/17045132/scrollbar-overlay-in-ie10-how-do-you-stop-that */
+body{
+    -ms-overflow-style: scrollbar;
 }
 
 #ilAll {
-	/* background: url("./images/login-page-bg.jpg") no-repeat;
-    background-size: 100% 100%; */
     position: relative;
-	height: auto !important;
-	min-height: calc(~"100% - 1px");
-	margin: 0 auto;
+    height: auto !important;
+    min-height: calc(~"100% - 1px");
+    margin: 0 auto;
 }
 
 div#minheight {
-	height:180px;
-	clear:both;
-	}
+    height: 180px;
+    clear: both;
+    }
 
 div.ilFrame {
-	margin-top:-40px;
-	margin-left:auto;
-	margin-right:auto;
-	max-width:1200px;
-	box-shadow: 0 0 40px #808080;
-	padding-top: 129px;
-	background-color: #f9f9f9;
-	min-height: 100%;
+    margin-top: -40px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    .box-shadow(0 0 40px #808080);
+    padding-top: 129px;
+    background-color: #f9f9f9;
+    min-height: 100%;
 }
 
 .ilContainerWidth {
-	max-width: 1040px;
-	padding: 0 30px;
+    max-width: 1400px;
+    padding: 0 30px;
 }
 
 /*
-	it would be good to limit the content width in some cases
-	- for many forms 1400px is too wide
-	- but not for all (e.g. question editing if tiny is used)
-	- screens that use tables often need the full width
-	- screens with (container) item lists often look ugly on 1400px (title <-> action arrow distance)
-	1028px is the current max. width of the center column if at least one other column
-	is displayed. This or any higher value could be set for the center column as a max-width,
-	but not for all screens, options:
-	- introduce a limiting class for center col and set this as "default", add another class that deactivates the
-	  limit (-> screens that have wide content need to activate this class)
-	- keep the current wide center col, introduce only a limiting class (-> screens that want a narrow view need
-	  to activate the class)
-	- use a limiting class only on some UI elements, e.g. forms and container item lists
+    it would be good to limit the content width in some cases
+    - for many forms 1400px is too wide
+    - but not for all (e.g. question editing if tiny is used)
+    - screens that use tables often need the full width
+    - screens with (container) item lists often look ugly on 1400px (title <-> action arrow distance)
+    1028px is the current max. width of the center column if at least one other column
+    is displayed. This or any higher value could be set for the center column as a max-width,
+    but not for all screens, options:
+    - introduce a limiting class for center col and set this as "default", add another class that deactivates the
+      limit (-> screens that have wide content need to activate this class)
+    - keep the current wide center col, introduce only a limiting class (-> screens that want a narrow view need
+      to activate the class)
+    - use a limiting class only on some UI elements, e.g. forms and container item lists
 */
 #il_center_col {
-	/* max-width: 1028px; */
+    /* max-width: 1028px; */
 }
 
 
 /* left navigation area (used, e.g. for explorer trees) */
 .ilLeftNav {
-	top: 0;
-	bottom:	0;
-	width: 300px;
-	float: left;
-	position: absolute;
-	padding: 5px;
-	margin-left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    float: left;
+    position: absolute;
+    padding: 5px;
+    margin-left: 15px;
     overflow: auto;
-	background-color: @il-secondary-container-bg;
-	border-right: 3px solid lighten(@mid-gray, 33%);
-	z-index: 100;
-	position: fixed;
-	top: @il-fixed-menu-height;
+    background-color: @il-secondary-container-bg;
+    border-right: 3px solid lighten(@mid-gray, 33%);
+    z-index: 100;
+    position: fixed;
+    top: @il-header-height;
 
-	@media only screen and (max-width: 640px) {width: 100%;}
+    @media only screen and (max-width: 640px) {width: 100%;}
 }
 [dir="rtl"] .ilLeftNav {
-	float: right;
-	margin-left: 0;
-	margin-right: 15px;
-	border-right: none;
-	border-left: 3px solid lighten(@mid-gray, 33%);
+    float: right;
+    margin-left: 0;
+    margin-right: 15px;
+    border-right: none;
+    border-left: 3px solid lighten(@mid-gray, 33%);
 }
 
 /* search */
 #ilMMSearch ul li {
-	padding: 5px;
+    padding: 5px;
 }
 
 #ilMMSearch ul li label {
-	font-weight: normal;
+    font-weight: normal;
 }
 
 #ilMMSearchMenu p {
-	white-space: nowrap;
+    white-space: nowrap;
 }
 
 #main_menu_search {
-	width: 200px;
+    width: 200px;
 }
 
 #ilTopBarNav .dropdown-menu #ilMMSearchMenu a {
-	&,
-	&:hover,
-	&:active,
-	&:focus {
-		color: lighten(@mid-gray, 70%);
-	}
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+        color: lighten(@mid-gray, 70%);
+    }
 }
 
 /* --------------------------------------------------------------
-	"Classic" delos part
+    "Classic" delos part
 -------------------------------------------------------------- */
 
 
@@ -376,50 +391,56 @@ div.ilFrame {
 -------------------------------------------------------------- */
 
 ul, ol, p {
-	margin: .8em 0;
+    margin: .8em 0;
 }
 
 ol, ul {
-	padding-left: 40px;
+    padding-left: 40px;
+    list-style-image: none;//mantis #19613: stop the inheritance for nested list until specifically setted
 }
 [dir="rtl"] ol, [dir="rtl"] ul {
-	padding-right: 40px;
-	padding-left: 0;
+    padding-right: 40px;
+    padding-left: 0;
 }
 
 ol ul, ul ol,
 ul ul, ol ol {
-	margin-top: 0;
-	margin-bottom: 0
+    margin-top: 0;
+    margin-bottom: 0
 }
 
 small, sub, sup {
-	font-size: .8em;
+    font-size: .8em;
 }
 
 em, i {
-	font-style: italic;
+    font-style: italic;
 }
 
 u {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 sub {
-	vertical-align: sub;
+    vertical-align: sub;
 }
 
 sup {
-	vertical-align: super;
+    vertical-align: super;
+}
+
+/* see bug #15971 */
+sub, sup {
+    position: static;
 }
 
 strong, b {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 a {
-	text-decoration: none;
-	cursor: pointer;
+    text-decoration: none;
+    cursor: pointer;
 /* BEGIN WebDAV: Enable links with AnchorClick behavior for Internet Explorer.
  * All skins which want to support mounting of Webfolders using Internet Explorer
  * must explicitly enable AnchorClick behavior.
@@ -429,52 +450,52 @@ a {
 }
 
 a:hover {
-	color: #000;
-	text-decoration: underline;
+    color: @link-hover-color;
+    text-decoration: underline;
 }
 
 hr {
-	margin-bottom: .8em;
-	border: none;
-	border-top: 1px solid #ddd;
+    margin-bottom: .8em;
+    border: none;
+    border-top: 1px solid #ddd;
 }
 
 table {
-	font-size: 100%;
+    font-size: 100%;
 }
 
 img {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 tr, td {
     vertical-align: top;
-	white-space: normal;
+    white-space: normal;
     word-wrap: break-word;
 }
 
 code {
-	font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L', 'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
-	font-size: 90%;
-	color: #858585;
+    font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L', 'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
+    font-size: 90%;
+    color: #858585;
 }
 
 ::selection {
-	background: lighten(@brand-primary, 48%);
+    background: lighten(@brand-primary, 48%);
 }
 
 ::-moz-selection {
-	background: lighten(@brand-primary, 48%);
+    background: lighten(@brand-primary, 48%);
 }
 
 
 @media print {
-  h1, h2, h3, h4, h5, h6 {
-	page-break-after: avoid;
+   h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
   }
 
   ul, ol, dl {
-	page-break-before: avoid;
+    page-break-before: avoid;
   }
 }
 
@@ -483,27 +504,27 @@ code {
 -------------------------------------------------------------- */
 
 body#tinymce, body.mceContentBody {
-	height: auto;
+    height: auto;
 }
 
 body#tinymce {
-	background-color: #ffffff;
+    background-color: white;
 }
 
 .ilHidden {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 .ilNoDisplay {
-	display: none !important;
+    display: none !important;
 }
 
 .ilDisplayBlock {
-	display: block;
+    display: block;
 }
 
 .ilClearFloat {
-	clear: both;
+    clear: both;
 }
 
 .ilFloatRight {
@@ -523,15 +544,15 @@ body#tinymce {
 }
 
 .ilWhiteSpaceNowrap {
-	white-space: nowrap;
+    white-space: nowrap;
 }
 
 .ilPositionRelative {
-	position: relative;
+    position: relative;
 }
 
 .ilPrintContent {
-	padding: 0 15px;
+    padding: 0 15px;
 }
 
 div.ilFrame {
@@ -539,27 +560,27 @@ div.ilFrame {
 
 
 .ilCenter {
-	text-align: center;
+    text-align: center;
 }
 
 .ilRight {
-	text-align: right;
+    text-align: right;
 }
 
 [dir="rtl"] .ilRight {
-	text-align: left;
+    text-align: left;
 }
 
 .ilLeft {
-	text-align: left;
+    text-align: left;
 }
 
 [dir="rtl"] .ilLeft {
-	text-align: right;
+    text-align: right;
 }
 
 .ilValignMiddle {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .registration {
@@ -568,25 +589,27 @@ div.ilFrame {
 }
 
 .ilFixedTopSpacer {
-	padding-top: @il-fixed-menu-height;
+    padding-top: @il-header-height;
 }
 
 .ilFixedTopSpacerBarOnly {
-	padding-top: @il-fixed-menu-height-bar-only;
+    padding-top: @il-top-bar-height;
 }
 
+div#mainspacekeeper {
+}
 
 div#mainscrolldiv {
 }
 
 .fullwidth {
-	width: 100%;
+    width: 100%;
 }
 
 /* --- 3 column layout -- */
 
 #ilContentContainer {
-	/*min-height: 400px;*/
+    /*min-height: 400px;*/
 }
 
 .il_ColumnLayout {
@@ -610,70 +633,70 @@ input.fullwidth, textarea.fullwidth {
 }
 
 div.input {
-	border: 1px solid #E0E0E0;
-	padding: 3px;
-	text-decoration: none;
-	font-size: 90%;
-	background-color: #FFF;
-	overflow: auto;
+    border: 1px solid #e0e0e0;
+    padding: 3px;
+    text-decoration: none;
+    font-size: 90%;
+    background-color: white;
+    overflow: auto;
 }
 div.input:focus {
-	border-color: #A0B0FF;
+    border-color: #a0b0ff;
 }
 input[type=text].numeric {
-	text-align: right;
+    text-align: right;
 }
 
 
 /* -------------------- table formatting ------------------ */
 
 div.ilCommandRow {
-	 text-align: right;
-	 padding-right: 1%;
-	 margin-bottom: 15px;
+     text-align: right;
+     padding-right: 1%;
+     margin-bottom: 15px;
 }
 
 [dir="rtl"] div.ilCommandRow {
-	 text-align: left;
-	 padding-right: 0;
-	 padding-left: 1%;
+     text-align: left;
+     padding-right: 0;
+     padding-left: 1%;
 }
 
 div.ilCommandRow.one_side_col {
-	 padding-right: 22%;
+     padding-right: 22%;
 }
 
 [dir="rtl"] div.ilCommandRow.one_side_col {
-	 padding-right: 0;
-	 padding-left: 22%;
+     padding-right: 0;
+     padding-left: 22%;
 }
 
 div.ilAdminRow {
-	margin: 10px 1% 20px;
-	width: 98%;
+    margin: 10px 1% 20px;
+    width: 98%;
 }
 
 table.std {
-	color: #222;
-	background-color: #BBB;
-	border-spacing: 0;
-	border-collapse: collapse;
-	border: 1px solid #9EADBA;
+    color: #222;
+    background-color: #bbb;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid #9eadba;
 }
 
 
 .fullwidth_invisible {
-	color: #222;
-	background-color: #FFF;
-	width: 100%;
-	border-spacing: 0;
+    color: #222;
+    background-color: white;
+    width: 100%;
+    border-spacing: 0;
 }
 
 table.nobackground {
-	color: #000;
-	background-color: inherit;
-	border-spacing: 0;
-	padding: 3px;
+    color: black;
+    background-color: inherit;
+    border-spacing: 0;
+    padding: 3px;
 }
 
 
@@ -681,7 +704,7 @@ table.nobackground {
   clear: both;
   margin: 0 -10px 0 0;
   padding-top: 5px;
-  /* border-top: 1px dotted #C0C0C0; */
+  /* border-top: 1px dotted #c0c0c0; */
 }
 
 [dir="rtl"] .subitem {
@@ -690,12 +713,12 @@ table.nobackground {
 }
 
 td.nobackground {
-	color: #000;
-	background-color: inherit;
-	border-spacing: 0;
-	border: none;
-	padding: 3px;
-	vertical-align: top;
+    color: black;
+    background-color: inherit;
+    border-spacing: 0;
+    border: none;
+    padding: 3px;
+    vertical-align: top;
 }
 
 
@@ -703,180 +726,181 @@ td.nobackground {
 }
 
 tr.tbltitle {
-	border-bottom: 1px solid #9EADBA;
+    border-bottom: 1px solid #9eadba;
 }
 
 tr.std {
-	background-color: #FFF;
-	color: #222;
-	padding: 3px;
+    background-color: white;
+    color: #222;
+    padding: 3px;
 }
 
 th {
-	text-align: left;
-	vertical-align: bottom;
-	font-weight: normal;
+    text-align: left;
+    vertical-align: bottom;
+    font-weight: normal;
 }
 
 td.std, th.std {
-	padding: 4px 6px;
-	text-align: left;
+    padding: 4px 6px;
+    text-align: left;
 }
 
 [dir="rtl"] th,
 [dir="rtl"] td.std, [dir="rtl"] th.std {
-	text-align: right;
+    text-align: right;
 }
 
 th.option, td.option {
-	background-color: #F5F5F5;
-	color: #222;
-	padding: 3px;
-	font-weight : bold;
-	vertical-align: top;
-	text-align: right;
-	border-top: 1px solid #9EADBA;
+    background-color: #f5f5f5;
+    color: #222;
+    padding: 3px;
+    font-weight : bold;
+    vertical-align: top;
+    text-align: right;
+    border-top: 1px solid #9eadba;
 }
 
 [dir="rtl"] th.option, [dir="rtl"] td.option {
-	text-align: left;
+    text-align: left;
 }
 
 td.sub_option {
-	background-color: #FFF;
-	color: #222;
-	padding: 3px;
-	font-weight : bold;
-	vertical-align: top;
-	border-top: 1px solid #9EADBA;
+    background-color: white;
+    color: #222;
+    padding: 3px;
+    font-weight : bold;
+    vertical-align: top;
+    border-top: 1px solid #9eadba;
 }
 
 td.option_value {
-	background: none #FFF;
-	color: #222;
-	padding: 3px;
-	vertical-align: top;
-	text-align: left;
-	border-top: 1px solid #9EADBA;
+    background: none white;
+    color: #222;
+    padding: 3px;
+    vertical-align: top;
+    text-align: left;
+    border-top: 1px solid #9eadba;
 }
 
 [dir="rtl"] td.option_value {
-	text-align: right;
+    text-align: right;
 }
 
 td.option_value_center {
-	background: none #FFF;
-	color: #222;
-	padding: 3px;
-	vertical-align: top;
-	text-align: center;
-	border-top: 1px solid #9EADBA;
+    background: none white;
+    color: #222;
+    padding: 3px;
+    vertical-align: top;
+    text-align: center;
+    border-top: 1px solid #9eadba;
 }
 
 td.option_desc, p.option_desc {
-	background: none #FFF;
-	color: #222;
-	padding: 3px;
-	font-style: italic;
-	font-weight: normal;
-	vertical-align: top;
-	text-align: left;
+    background: none white;
+    color: #222;
+    padding: 3px;
+    font-style: italic;
+    font-weight: normal;
+    vertical-align: top;
+    text-align: left;
 }
 
 [dir="rtl"] td.option_desc, [dir="rtl"] p.option_desc {
-	text-align: right;
+    text-align: right;
 }
 
 td.boxed {
-	border: 1px solid #000;
+    border: 1px solid black;
 }
 
 /*Link, Visited, Hover, Focus, Activ*/
 a.il_ContainerItemCommand2:link, a.il_ContainerItemCommand2:visited,
 a.il_ContainerItemCommand:link, a.il_ContainerItemCommand:visited {
-	font-size: 80%;
-	text-decoration: none;
-	margin: 0 3px 0 0;
-	white-space: nowrap;
-	font-weight: normal;
+    font-size: 80%;
+    text-decoration: none;
+    margin: 0 3px 0 0;
+    white-space: nowrap;
+    font-weight: normal;
 }
 
 [dir="rtl"] a.il_ContainerItemCommand2:link,
 [dir="rtl"] a.il_ContainerItemCommand2:visited,
 [dir="rtl"] a.il_ContainerItemCommand:link,
 [dir="rtl"] a.il_ContainerItemCommand2:visited {
-	margin: 0 0 0 3px;
+    margin: 0 0 0 3px;
 }
 
 a.il_ContainerItemCommand2:hover,
 a.il_ContainerItemCommand:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 div.il_ContainerItemCommands2 {
-	text-align: right;
-	margin: 0 3px 3px;
+    text-align: right;
+    margin: 0 3px 3px;
 }
 
 [dir="rtl"] div.il_ContainerItemCommands2 {
-	text-align: left;
+    text-align: left;
 }
 
 div.il_ContainerItemCommands {
-	padding: 2px 0;
+    padding: 2px 0;
 }
 
 h4.il_ContainerItemTitle {
-	padding: 0;
-	margin: 0;
-	font-weight: normal;
-	font-size: 100%;
-	display: inline;
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    font-size: 100%;
+    display: inline;
 }
 
 div.il_ContainerItemTitle {
-	float: left;
-	padding-bottom: 5px;
+    float: left;
+    max-width: calc(~"100% - 40px");
+    padding-bottom: 5px;
 }
 
 [dir="rtl"] div.il_ContainerItemTitle {
-	float: right;
+    float: right;
 }
 
 div.il_ItemProperties {
-	margin: 2px 0 5px;
-	text-align: left;
-	font-weight: normal;
-	font-size: 90%;
+    margin: 2px 0 5px;
+    text-align: left;
+    font-weight: normal;
+    font-size: 90%;
 }
 
 [dir="rtl"] div.il_ItemProperties {
-	text-align: right;
+    text-align: right;
 }
 
 div.il_ItemNotice {
-	margin: 2px 0 5px;
-	text-align: left;
-	font-weight: normal;
-	font-size: 90%;
-	color: green;
+    margin: 2px 0 5px;
+    text-align: left;
+    font-weight: normal;
+    font-size: 90%;
+    color: green;
 }
 
 [dir="rtl"] div.il_ItemNotice {
-	text-align: right;
+    text-align: right;
 }
 
 a.il_ItemProperty:link, a.il_ItemProperty:visited {
-	text-decoration: none;
-	font-weight: normal;
+    text-decoration: none;
+    font-weight: normal;
 }
 
 a.il_ItemProperty:hover {
-	color: #000;
+    color: black;
 }
 
 span.il_ItemAlertProperty {
-	color: @brand-warning;
+    color: @brand-warning;
 }
 
 span.il_ItemProperty {
@@ -893,306 +917,323 @@ a.tblheader:hover {
 
 /* --- description text ---*/
 div.il_Description, td.il_Description {
-	margin: 2px 0 5px;
-	font-size: 90%;
-	font-weight: normal;
-	text-align: left;
+    margin: 2px 0 5px;
+    font-size: 90%;
+    font-weight: normal;
+    text-align: left;
 }
 
 [dir="rtl"] div.il_Description,
 [dir="rtl"] td.il_Description {
-	text-align: right;
+    text-align: right;
 }
 
 div.il_Description_no_margin, td.il_Description_no_margin {
-	font-size: 90%;
-	font-style: italic;
-	text-align: left;
+    font-size: 90%;
+    font-style: italic;
+    text-align: left;
 }
 
 [dir="rtl"] div.il_Description_no_margin,
 [dir="rtl"] td.il_Description_no_margin {
-	text-align: right;
+    text-align: right;
 }
 
 div.il_info {
-	font-size: 90%;
-	text-align: left;
+    font-size: 90%;
+    text-align: left;
 }
 
 [dir="rtl"] div.il_info {
-	text-align: right;
+    text-align: right;
 }
 
 /* ---------------- headlines ------------------ */
 
 
 a#il_mhead_t_focus {
-	color: @brand-secondary;
-	vertical-align: middle;
-	font-size: 26px
+    color: @brand-secondary;
+    vertical-align: middle;
+    font-size: 26px;
+    cursor: default;
+    &[href] {
+        cursor: pointer;
+    }
 }
 
 h1.ilHeader {
-	padding: 10px 0 0;
+    padding: 10px 0 0;
 }
 
 h3.ilHeader {
-	font-weight: normal;
-	padding: 0;
-	margin: 0;
-	display: inline;
-	font-size: @font-size-h3;
-	color: lighten(@mid-gray,30%);
-	text-transform: uppercase;
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    font-size: @font-size-h3;
+    color: lighten(@mid-gray,30%);
+    text-transform: uppercase;
 }
 
 #headerimage {
-	width: 45px;
-	height: 45px;
-	margin-top: 3px;
-	margin-right: 10px;
-	float: left;
-	//background-color: white;
+    width: 45px;
+    height: 45px;
+    margin-top: 3px;
+    margin-right: 10px;
+    float: left;
+    //background-color: white;
 }
 
 [dir="rtl"] #headerimage {
-	margin-right: 0;
-	margin-left: 10px;
-	float: right;
+    margin-right: 0;
+    margin-left: 10px;
+    float: right;
 }
 
 
 span.ilHeader {}
 
 div.ilHeadAction {
-	float: right;
-	margin: 8px 0 5px; /* bottom 5px blog fullscreen */
+    float: right;
+    margin: 8px 0 5px; /* bottom 5px blog fullscreen */
 }
 
 [dir="rtl"] div.ilHeadAction {
-	float: left;
+    float: left;
 }
 
 div.ilHeadAction .prop {
-	padding-right: 10px;
+    padding-right: 10px;
 }
 
 [dir="rtl"] div.ilHeadAction .prop {
-	padding-right: 0;
-	padding-left: 10px;
+    padding-right: 0;
+    padding-left: 10px;
 }
 
 div.ilHeadAction a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 div.ilHeaderDesc {
-	font-size: 90%;
-	padding: 0;
-	color: lighten(@text-color, 25%);
-	font-family: 'Open Sans Light'
+    font-size: 90%;
+    padding: 0;
+    color: lighten(@text-color, 25%);
+    font-weight: 300;
 }
 
 div.ilHeaderAlert {
-	font-size: 90%;
-	padding: 0;
-	font-family: 'Open Sans Light';
-	color: @brand-warning;
+    font-size: 90%;
+    padding: 0;
+    font-weight: 300;
+    color: @brand-warning;
 }
 
 div.il_HeaderInner {
-	padding: 15px 15px;
-	margin-bottom: 5px;
-	overflow: visible;
+    padding: 15px 15px;
+    margin-bottom: 5px;
+    overflow: visible;
 }
 
 div.il_HeaderInner.media {
-	margin-top: 0px;
+    margin-top: 0px;
 }
 
 div.il_TreeIcons {
-	padding: 15px 15px 0 0;
-	margin: 0;
-	float: right;
+    padding: 15px 15px 0 0;
+    margin: 0;
+    float: right;
 }
 
 [dir="rtl"] div.il_TreeIcons {
-	padding: 15px 0 0 15px;
-	float: left;
+    padding: 15px 0 0 15px;
+    float: left;
 }
 
 div.il_Footer {
-	padding: 10px 0;
-	font-size: 90%;
-	text-align: center;
+    padding: 10px 0;
+    font-size: 90%;
+    text-align: center;
 }
 
 footer.ilFooter {
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: -1px !important;
-    border-top: 2px solid darken(@mid-gray, 10%);
-	font-size: 0.9em;
-	height: 160px;
-	margin: 0 auto;
-	padding: 20px 0 0;
-	text-align: left;
-	color: white;
-	background-color: lighten(@mid-gray, 0%);
-	div.ilFooterContainer {
-		color: white;
-		//float: left;
-		line-height: 1.75;
-		padding: 0 15px;
-	}
-	a.permalink_label,
-	div.ilFooterContainer > a {
-		color: white;
-		white-space: nowrap;
-		&:hover {
-			color: white;
-		}
-	}
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px !important;
+    font-size: 0.9em;
+    height: 70px;
+    margin: 0 auto;
+    padding: 20px 0 0;
+    text-align: left;
+    color: white;
+    background-color: @brand-primary;
+    div.ilFooterContainer {
+        color: white;
+        //float: left;
+        line-height: 1.75;
+        padding: 0 15px;
+    }
+    a.permalink_label,
+    div.ilFooterContainer > a {
+        color: white;
+        white-space: nowrap;
+        &:hover {
+            color: white;
+        }
+    }
 }
 
 [dir="rtl"] footer.ilFooter {
-	text-align: right;
+    text-align: right;
+}
+
+#devmodeBlock {
+    background-color: white;
+    color: black;
+    border: 1px dashed grey;
+    padding: 10px;
+    margin-top: 25px;
+    table {
+        @media only screen and (max-width: @grid-float-breakpoint-max) {
+            table-layout: fixed;
+            width: 100%;
+        }
+    }
 }
 
 /* ----------------- permanent link  ------------- */
 div.ilPermaLink {
-	margin: 15px;
+    margin: 15px;
 }
 
 div.ilPermaLink .small {
-	font-size: 70%;
+    font-size: 70%;
 }
 
 div.ilPermaLink .il_adv_sel {
-	font-size: 100%;
+    font-size: 100%;
 }
 
 div.ilPermaLink input {
-	font-size: 70%;
-	width: 350px;
+    font-size: 70%;
+    width: 350px;
 }
 
 div.ilPermaLink a {
-	font-size: 1em;
+    font-size: 1em;
 }
 
 #current_perma_link {
-	color: @text-color;
-	width: 25%;
-	font-size: 90%;
-	+ .btn-group {
-		vertical-align: top;
-	}
+    color: @text-color;
+    width: 25%;
+    font-size: 90%;
+    + .btn-group {
+        vertical-align: top;
+    }
 }
 
 
 /* ----------------- invisible border ------------- */
 div.invisible_border {
-	margin: 15px;
+    margin: 15px;
 }
 
 .ilInvisibleBorder {
-	padding: 15px;
+    padding: 15px;
 }
 
 /* ------- Helptext --------- */
 span.il_Helptext {
-	font-size: 90%;
-	font-weight: normal;
+    font-size: 90%;
+    font-weight: normal;
 }
 
 /* ----------------- alternative text styles ------------- */
 .small {
-	text-decoration: none;
-	font-size: 90%;
+    text-decoration: none;
+    font-size: 90%;
 }
 
 .xsmall {
-	text-decoration: none;
-	font-size: 80%;
+    text-decoration: none;
+    font-size: 80%;
 }
 
 .smallgreen {
-	text-decoration: none;
-	font-size: 90%;
-	color: green;
+    text-decoration: none;
+    font-size: 90%;
+    color: green;
 }
 
 .smallred {
-	text-decoration: none;
-	font-size: 90%;
-	color: red;
+    text-decoration: none;
+    font-size: 90%;
+    color: red;
 }
 
 .obligatory {
-	font-weight: normal;
-	color: #800000;
-	font-variant: normal;
+    font-weight: normal;
+    color: #800000;
+    font-variant: normal;
 }
 
 .warning {
-	text-decoration: none;
-	font-weight: bold;
-	color: red;
+    text-decoration: none;
+    font-weight: bold;
+    color: red;
 }
 
 div.Access {
-	text-decoration: none;
-	font-weight: bold;
-	text-decoration: underline;
-	color: red;
+    text-decoration: none;
+    font-weight: bold;
+    text-decoration: underline;
+    color: red;
 }
 
 .asterisk {
-	color: red;
-	font-size: 90%;
+    color: red;
+    font-size: 90%;
 }
 
 .default {
-	text-decoration: none;
-	font-weight: normal;
+    text-decoration: none;
+    font-weight: normal;
 }
 
 
 .quote {
-	font-style: italic;
-	font-weight: normal;
+    font-style: italic;
+    font-weight: normal;
 }
 
 .subtitle {
-	font-style: italic;
-	font-weight: normal;
-	font-size: 90%;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 90%;
 }
 
 .questiontext {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .bold {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 /* ----------------- alternative text styles ------------- */
 .light {
-	color: #909090;
+    color: #909090;
 }
 
 /* ----------------- normal links ------------- */
 a.light:link, a.light:visited {
-	text-decoration: none;
-	color: #35B;
+    text-decoration: none;
+    color: #35b;
 }
 
 a.light:hover {
-	color: #000;
+    color: black;
 }
 
 /* Messages */
@@ -1218,69 +1259,69 @@ div.ilMessageBox {
 /* ------------------ blind image - spacer gif --------------
    please use this style class always when using this blind image */
 img.spacer {
-	display: block;
+    display: block;
 }
 
 div#agreement {
-	width: 100%;
-	height: 375px;
-	overflow: auto;
-	overflow-x: hidden;
+    width: 100%;
+    height: 375px;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 
 /* bottom center area (optional bottom area, used e.g. in learning modules) */
 div#bot_center_area {
-	bottom:	0;
-	height: 300px;
-	position: fixed;
-	padding: 5px;
-	background-color: @body-bg;
-	border-top: 3px solid #E9E9E9;
-	-webkit-overflow-scrolling: touch; /* Bug 11209 */
-	overflow: auto; /* Bug 11209 */
+    bottom: 0;
+    height: 300px;
+    position: fixed;
+    padding: 5px;
+    background-color: @body-bg;
+    border-top: 3px solid #e9e9e9;
+    -webkit-overflow-scrolling: touch; /* Bug 11209 */
+    overflow: auto; /* Bug 11209 */
 }
 
 div#bot_center_area iframe {
-	-webkit-overflow-scrolling: touch; /* Bug 11209 */
-	overflow: auto; /* Bug 11209 */
-	border: none;
-	width: 100%;
-	height: 100%;
+    -webkit-overflow-scrolling: touch; /* Bug 11209 */
+    overflow: auto; /* Bug 11209 */
+    border: none;
+    width: 100%;
+    height: 100%;
 }
 
 div#bot_center_area_drag {
-	left: 0;
-	right: 0;
-	height: 4px;
-	cursor: row-resize;
-	margin-top: -8px;
-	position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    cursor: row-resize;
+    margin-top: -8px;
+    position: absolute;
 }
 
 #drag_zmove {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: 7;
-	display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 7;
+    display: none;
 }
 
 div#bot_center_area_drag:hover {
-	background: none #FA9;
+    background: none #fa9;
 }
 
 
 .ilLeftNavSpace {
-	/* padding: 0 20px 0 310px; */
-	margin-left: 315px !important;
-	@media (max-width: @grid-float-breakpoint-max) {margin-left: 0 !important;}
+    /* padding: 0 20px 0 310px; */
+    margin-left: 315px !important;
+    @media (max-width: @grid-float-breakpoint-max) {margin-left: 0 !important;}
 }
 
 [dir="rtl"] .ilLeftNavSpace {
-	margin-left: 0 !important;
-	margin-right: 315px !important;
-	@media (max-width: @grid-float-breakpoint-max) {margin-right: 0 !important;}
+    margin-left: 0 !important;
+    margin-right: 315px !important;
+    @media (max-width: @grid-float-breakpoint-max) {margin-right: 0 !important;}
 }
 
 
@@ -1290,61 +1331,61 @@ div.ilContentFixed {
 
 /* right panel (e.g. notes, comments) */
 div.ilRightPanel {
-	overflow: auto;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	width: 500px;
-	left: auto !important;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 500px;
+    left: auto !important;
 }
 
 [dir="rtl"] div.ilRightPanel {
-	right: auto !important;
-	width: 500px;
-	left: 0 !important;
+    right: auto !important;
+    width: 500px;
+    left: 0 !important;
 }
 
 #ilRightPanelClose {
-	display: block;
-	float: right;
+    display: block;
+    float: right;
 }
 
 [dir="rtl"] #ilRightPanelClose {
-	float: left;
+    float: left;
 }
 
 
 /* Overlays, Blocks */
 .ilOverlay {
-	background-color: #FFF;
-	border: 1px solid #D6D6D6;
-	text-align: left;
-	position: absolute;
-	box-shadow: 2px 2px 4px #C0C0C0;
+    background-color: white;
+    border: 1px solid #d6d6d6;
+    text-align: left;
+    position: absolute;
+    .box-shadow(2px 2px 4px #c0c0c0);
 }
 
 [dir="rtl"] .ilOverlay {
-	text-align: right;
+    text-align: right;
 }
 
 .ilAccHeadingHidden, .ilAccHidden, .ui-helper-hidden-accessible {
-	position: absolute;
-	left: -2000px;
-	top: auto;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
+    position: absolute;
+    left: -2000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
 
 [dir="rtl"] .ilAccHeadingHidden, [dir="rtl"] .ilAccHidden, [dir="rtl"] .ui-helper-hidden-accessible {
-	left: auto; /* may causes a scrollbar when omitted */
-	right: -2000px;
+    left: auto; /* may causes a scrollbar when omitted */
+    right: -2000px;
 }
 
 a.ilAccAnchor, a.ilAccAnchor:hover {
-	text-decoration: none;
-	color: inherit;
+    text-decoration: none;
+    color: inherit;
 }
 
 /* revised 4.1 */
@@ -1352,48 +1393,48 @@ a.ilAccAnchor, a.ilAccAnchor:hover {
 
 /* Fixed Frame Width */
 div.ilFrameFixedWidth, .ilFrameFixedWidth #mainscrolldiv {
-	/* max-width: 1370px; */
-	margin: 0 auto;
+    /* max-width: 1370px; */
+    margin: 0 auto;
 }
 
 .ilFrameFixedWidth #mainscrolldiv {
-	max-width: 1370px;
-	margin: 0 auto;
+    max-width: 1370px;
+    margin: 0 auto;
 }
 
 div.ilFrameFixedWidthHeader {
-	max-width: 1370px;
-	margin: 0 auto;
-	padding: 0;
+    max-width: 1370px;
+    margin: 0 auto;
+    padding: 0;
 }
 
 .ilFrameFixedWidthHeader div.ilHeaderBanner {
-	max-width: 1370px;
-	overflow: hidden;
-	padding: 0 15px;
+    max-width: 1370px;
+    overflow: hidden;
+    padding: 0 15px;
 }
 
 div.ilHeaderBanner img.ilHeaderImg {
-	width: 100%;
+    width: 100%;
 }
 
 .ilFrameFixedWidth h1.ilHeader {
 }
 
 .ilFrameFixedWidth div.ilHeaderDesc {
-	padding-left: 0;
+    padding-left: 0;
 }
 
 [dir="rtl"] .ilFrameFixedWidth div.ilHeaderDesc {
-	padding-left: inherit;
-	padding-right: 0;
+    padding-left: inherit;
+    padding-right: 0;
 }
 
 div.ilBox {
-	background: url("@{background-images-path}FramedBack.png") repeat-x;
-	border: 1px solid #E0E0E0;
-	padding: 10px;
-	margin-bottom: 20px;
+    background: url("@{background-images-path}FramedBack.png") repeat-x;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 /* Top-Bar */
@@ -1404,500 +1445,244 @@ div.ilTopBar {
 }
 
 div.ilTopBar a {
-	color: white;
+    color: white;
 }
 
 div.ilTopBarLeft {
-	float: left;
+    float: left;
 }
 
 [dir="rtl"] div.ilTopBarLeft {
-	float: right;
+    float: right;
 }
 
 div.ilTopBarRight {
-	float: right;
+    float: right;
 }
 
 [dir="rtl"] div.ilTopBarRight {
-	float: left;
+    float: left;
 }
 
 div.ilTopBarRight span#ilAdvSelListAnchorElement_asl {
-	margin-right: 25px;
-	color: black;
+    margin-right: 25px;
+    color: black;
 }
 
 [dir="rtl"] div.ilTopBarRight span#ilAdvSelListAnchorElement_asl {
-	margin-right: 0;
-	margin-left: 25px;
+    margin-right: 0;
+    margin-left: 25px;
 }
 
 div.ilTopBarRight td.il_adv_sel {
-	background-color: #444;
+    background-color: #444;
 }
 
 div.ilSideBarHead{
-	background-color: #F0F0F0;
-	margin-bottom: 5px;
-	padding: 5px;
+    background-color: #f0f0f0;
+    margin-bottom: 5px;
+    padding: 5px;
 }
 
 div.ilSideBarHead h3{
-	font-size: 110%;
-	color: #606060;
-	display: inline;
+    font-size: 110%;
+    color: #606060;
+    display: inline;
 }
 
 div.ilSideBarContent{
-	padding: 5px;
+    padding: 5px;
 }
 
 /* jquery ui autocomplete */
 .ui-menu {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	display: block;
-	float: left;
-	background-color: white;
-	border: 1px solid #E0E0E0;
-	font-size: 90%;
-	box-shadow: 2px 2px 4px #C0C0C0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    float: left;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    font-size: 90%;
+    .box-shadow(2px 2px 4px #c0c0c0);
 }
 
 [dir="rtl"] .ui-menu {
-	float: right;
+    float: right;
 }
 
 .ui-menu .ui-menu-item {
-	margin: 0;
-	padding: 0;
-	zoom: 1;
-	float: left;
-	clear: left;
-	width: 100%;
+    margin: 0;
+    padding: 0;
+    zoom: 1;
+    float: left;
+    clear: left;
+    width: 100%;
 }
 
 [dir="rtl"] .ui-menu .ui-menu-item {
-	float: right;
-	clear: right;
+    float: right;
+    clear: right;
 }
 
 .ui-menu .ui-menu-category {
-	margin: 0;
-	padding: 2px;
-	zoom: 1;
-	float: left;
-	clear: left;
-	width: 100%;
-	font-weight: bold;
+    margin: 0;
+    padding: 2px;
+    zoom: 1;
+    float: left;
+    clear: left;
+    width: 100%;
+    font-weight: bold;
 }
 
 [dir="rtl"] .ui-menu .ui-menu-category {
-	float: right;
-	clear: right;
+    float: right;
+    clear: right;
 }
 
 .ui-menu .ui-menu-more {
-	display: block;
-	zoom: 1;
-	color: #03A;
-	cursor: pointer;
-	float: left;
-	clear: left;
-	width: 100%;
+    display: block;
+    zoom: 1;
+    color: #03a;
+    cursor: pointer;
+    float: left;
+    clear: left;
+    width: 100%;
 }
 
 
 [dir="rtl"] .ui-menu .ui-menu-more {
-	float: right;
-	clear: right;
+    float: right;
+    clear: right;
 }
 
 .ui-menu .ui-menu-more span {
-	padding: 2px;
+    padding: 2px;
 }
 
 .ui-menu .ui-menu-more:hover {
-	background-color: white;
+    background-color: white;
 }
 
 .ui-autocomplete {
-	max-height: 400px;
-	overflow-y: auto;
-	/* prevent horizontal scrollbar */
-	overflow-x: hidden;
+    max-height: 400px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
 }
 
 .ui-menu .ui-menu-item a {
-	text-decoration: none;
-	display: block;
-	padding: 2px 4px;
-	line-height: 1.5;
-	zoom: 1;
-	color: #03A;
+    text-decoration: none;
+    display: block;
+    padding: 2px 4px;
+    line-height: 1.5;
+    zoom: 1;
+    color: #03a;
 }
 .ui-menu .ui-menu-item a.ui-state-hover,
 .ui-menu .ui-menu-item a.ui-state-active {
-	background-color: #FF9;
+    background-color: #ff9;
+}
+
+/* Icon Default */
+img.ilIcon {
+    width: 32px;
+    height: 32px;
+}
+
+/* PreventBreakOut, see https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
+.ilPreventBreakOut {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }
 
 
 /* Component Imports */
 
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Accordion/delos.less                 */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Accordion/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/ScormAicc/delos.less                  */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/ScormAicc/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Form/delos.less                      */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Form/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/Explorer2/delo           */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/Explorer2/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/Forum/delos.less                      */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/Forum/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Mail/delos.less                      */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Mail/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/COPage/delos.less                    */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/COPage/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Calendar/delos.less                  */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Calendar/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/Wiki/delos.less                       */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/Wiki/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/MainMenu/delos.less                  */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/MainMenu/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/Tabs/delo                */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/Tabs/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/GroupedList/delo         */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/GroupedList/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Table/delos.less                     */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Table/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Notes/delos.less                     */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Notes/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/Blog/delos.less                       */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/Blog/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Skill/delos.less                     */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Skill/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/Poll/delos.less                       */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/Poll/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Search/delos.less                    */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Search/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Help/delos.less                      */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Help/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/DataCollection/delos.less             */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/DataCollection/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/Bibliographic/delos.less              */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/Bibliographic/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/MediaObjects/delos.less              */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/MediaObjects/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Chart/delos.less                     */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Chart/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Captcha/delos.less                   */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Captcha/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/User/delos.less                      */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/User/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Style/delos.less                     */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Style/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/Course/delos.less                     */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/Course/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/Chatroom/delos.less                   */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/Chatroom/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Container/delos.less                 */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Container/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/LearningModule/delos.less             */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/LearningModule/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/PersonalDesktop/delos.less           */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/PersonalDesktop/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*   FROM less/Services/UIComponent/AdvancedSelectionList/delo */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/AdvancedSelectionList/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Object/delos.less                    */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Object/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Navigation/delos.less                */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Navigation/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Block/delos.less                     */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Block/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/Lightbox/delo            */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/Lightbox/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Membership/delos.less                */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Membership/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/BookingManager/delos.less             */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/BookingManager/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/InfoScreen/delos.less                */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/InfoScreen/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Init/delos.less                      */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Init/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Bookmarks/delos.less                 */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Bookmarks/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/Toolbar/delo             */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/Toolbar/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/Tooltip/delo             */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/Tooltip/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Locator/delos.less                   */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Locator/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/Button/delo              */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/Button/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Rating/delos.less                    */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Rating/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/Panel/delo               */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/Panel/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/Excercise/delos.less                  */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/Excercise/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/ProgressBar/delo         */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/ProgressBar/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/News/delos.less                      */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/News/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/Survey/delos.less                     */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/Survey/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/MediaPool/delos.less                  */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/MediaPool/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/Tags/delos.less                      */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/Tags/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/UIComponent/Checklist/delos.less     */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/UIComponent/Checklist/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Modules/WorkspaceFolder/delos.less            */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Modules/WorkspaceFolder/delos.less";
-/* ------------------------------------------------------------*/
-/*                                                             */
-/*     FROM less/Services/FileUpload/delos.less                */
-/*                                                             */
-/*-------------------------------------------------------------*/
 @import "less/Services/FileUpload/delos.less";
+@import "less/Modules/Portfolio/delos.less";
+@import "less/Services/Awareness/delos.less";
+@import "less/Services/OnScreenChat/delos.less";
+@import "less/Services/UIComponent/Modal/delos.less";
+@import "less/Services/Badge/delos.less";
+@import "less/Services/Calendar/bootstrap-datetimepicker.less";
 
 .noMargin {
-	margin: 0;
+    margin: 0;
 }
 
 div.editLink {
-	padding-right: 1em;
+    padding-right: 1em;
 }
 
 [dir="rtl"] div.editLink {
-	padding-right: 0;
-	padding-left: 1em;
+    padding-right: 0;
+    padding-left: 1em;
 }
 
 img[src$="icon_checked.svg"] {
-	height: 11px;
+    height: 11px;
     margin: 0 6px 0 5px;
     opacity: 0.5;
     width: 11px;
@@ -1909,36 +1694,49 @@ img[src$="icon_checked.svg"] {
 
 .glyphicon-ok {
     font-size: 11px;
-	text-align: center;
+    text-align: center;
 }
 
 div.ilNewObjectSelector {
-	margin-bottom: 8px;
-	text-align: right;
-	padding-right:10px;
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 0 10px;
+    width: 100%;
+    > .btn-group {
+        display: block;
+        width: 100%;
+        #ilAdvSelListAnchorText_asl {
+            float: right;
+        }
+        .dropdown-menu.pull-right {
+            top: 30px;
+        }
+    }
 }
 
 [dir="rtl"] div.ilNewObjectSelector {
-	text-align: left;
-	padding-right: 0;
-	padding-left: 10px;
+    > .btn-group {
+        #ilAdvSelListAnchorText_asl {
+            float: left;
+        }
+    }
 }
 
 .pdMailRow {
-	.imageSpace {
-		margin-left: 40px;
-	}
-	> img {
-		margin: 2px 0;
-		max-width:30px;
-	}
+    .imageSpace {
+        margin-left: 40px;
+    }
+    > img {
+        margin: 2px 0;
+        max-width:30px;
+    }
 }
 
 [dir="rtl"] .pdMailRow {
-	.imageSpace {
-		margin-left: 0;
-		margin-right: 40px;
-	}
+    .imageSpace {
+        margin-left: 0;
+        margin-right: 40px;
+    }
 }
 
 [dir="rtl"] .radio label, [dir="rtl"] .checkbox label {
@@ -1955,51 +1753,68 @@ div.ilNewObjectSelector {
 }
 
 .il_InfoScreenSection {
-	padding: 10px 10px 0;
-	> .ilFloatRight {
-		padding-bottom: 4px;
-		padding-right: 4px;
-	}
+    padding: 10px 10px 0;
+    > .ilFloatRight {
+        padding-bottom: 4px;
+        padding-right: 4px;
+    }
 }
 
 [dir="rtl"] .il_InfoScreenSection {
-	> .ilFloatRight {
-		padding-right: 0;
-		padding-left: 4px;
-	}
+    > .ilFloatRight {
+        padding-right: 0;
+        padding-left: 4px;
+    }
 }
 
 .yui-panel-container {
-	color: @text-color;
+    color: @text-color;
 }
 .mceEditor, .mceLayout {
-	width: 100% !important;
+    width: 100% !important;
 }
 
 table.mceLayout {
-	table-layout: fixed;
+    table-layout: fixed;
 }
 
 .mceIframeContainer iframe {
-	max-width: 100%;
+    max-width: 100%;
 }
 
 table.mceToolbar {
-	table-layout: fixed;
-	display: inline-block;
-	float: left;
-	height: auto !important;
-	max-width: 100%;
-	tbody, tr, td {
-		display: inline-block;
-		white-space: normal !important;
-	}
+    table-layout: fixed;
+    display: inline-block;
+    float: left;
+    height: auto !important;
+    max-width: 100%;
+    tbody, tr, td {
+        display: inline-block;
+        white-space: normal !important;
+    }
 }
 
 .alert {
-	> a {
-		text-decoration: underline;
-	}
+    > a {
+        text-decoration: underline;
+    }
+}
+.alert {
+    > a.btn {
+        text-decoration: none;
+    }
+}
+
+//mantis #0017724, 17884, #17943
+#ilAdvSelListAnchorText_asl + ul.dropdown-menu > li > div.row,
+#ilAdvSelListAnchorText_asl + .dropdown-backdrop + ul.dropdown-menu > li > div.row,
+#mm_adm_tr + span + ul.dropdown-menu > li > div.row,
+#mm_adm_tr + ul.dropdown-menu > li > div.row {
+    width: 750px;
+    @media only screen and (max-width: @grid-float-breakpoint-max) {
+        width: 100% !important;
+        margin: 0;
+    }
 }
 /* basic responsiveness (beta)
 
@@ -2014,182 +1829,253 @@ table.mceToolbar {
    Google recommending 640px: https://developers.google.com/webmasters/smartphone-sites/details
 
    */
+
 @media
-	only screen and (max-width: @grid-float-breakpoint-max)
+    only screen and (max-width: @grid-float-breakpoint-max)
 {
-	html {
-		-webkit-text-size-adjust: none;
-	}
+    html {
+        -webkit-text-size-adjust: none;
+    }
 
     div#mainscrolldiv {
     }
 
-	.ilContainerWidth {
-		padding: 0 15px;
-	}
-
-    div.il_HeaderInner {
-		color: #222;
-		margin-bottom: 5px;
-		padding: 15px;
-	}
-
-
-	textarea {
-		max-width: 100%;
-	}
-
-	input, select {
-		max-width: 100%;
-	}
-
-	/* height: auto; messes e.g. survey progress bar */
-	img {
-		max-width: 100%;
-	}
-
-	// this fixes the open street map images, not the best place to
-	// to this. another option would be to not put the
-	// max-width behaviour above on every img...
-	img.olTileImage {
-		max-width: none;
-	}
-
-
-	div.ilFrame {
-		margin: 0;
-		width: 100%;
-	}
-
-	div.ilLeftNav {
-
-	}
-
-	div.ilLeftNavSpace {
-
-	}
-
-	div.ilContentFixed {
-	}
-
-	.ilFrameFixedWidthHeader div.ilHeaderBanner {
-		max-width: 100%;
-		height: 40px !important;
-		padding: 0;
+    .ilContainerWidth {
+        padding: 0 15px;
     }
 
-	div.ilTableOuter {
-		max-width: 100%;
-		overflow: auto;
-	}
-
-	// main header
-	a#il_mhead_t_focus {
-		font-size: 20px
-	}
-
-	h1.ilHeader {
-		padding-top: 5px;
-	}
-
-	// header image
-	#headerimage {
-		width: 35px;
-		height: 35px;
-		margin-top: 2px;
-		margin-right: 7px;
-	}
-
-	/* @import "less/Services/MainMenu/delos_sm.less"; */
-	/* @import "less/Services/UIComponent/Tabs/delos_sm.less"; */
-	/* @import "less/Services/Form/delos_sm.less"; */
-	@import "less/Modules/Forum/delos_sm.less";
-	@import "less/Services/Init/delos_sm.less";
-	@import "less/Services/MainMenu/delos_sm.less";
-	@import "less/Services/COPage/delos_sm.less";
-	@import "less/Services/UIComponent/Button/delos_sm.less";
+    div.il_HeaderInner {
+        color: #222;
+        margin-bottom: 5px;
+        padding: 15px;
+    }
 
 
-	div.ilGoogleMap {
-		max-width: 100%;
-	}
+    textarea {
+        max-width: 100%;
+    }
 
-	/* at last temporary, since it overlaps content */
-	a.ilTreeView, .ilLeftNav {
-		display: none;
-	}
+    input, select {
+        max-width: 100%;
+    }
 
-	/* no idea why needed, but this one fixes the drop downs in the small media view (e.g. main menu) */
-	.navbar-nav {
-		margin: 7.5px 0px;
-	}
+    /* height: auto; messes e.g. survey progress bar */
+    img {
+        max-width: 100%;
+    }
+
+    div.ilc_Mob img {
+        height: auto !important;
+    }
+
+    // this fixes the open street map images, not the best place to
+    // to this. another option would be to not put the
+    // max-width behaviour above on every img...
+    img.olTileImage {
+        max-width: none;
+    }
+
+
+    div.ilFrame {
+        margin: 0;
+        width: 100%;
+    }
+
+    div.ilLeftNav {
+
+    }
+
+    div.ilLeftNavSpace {
+
+    }
+
+    div.ilContentFixed {
+    }
+
+    .ilFrameFixedWidthHeader div.ilHeaderBanner {
+        max-width: 100%;
+        height: 40px !important;
+        padding: 0;
+    }
+
+    div.ilTableOuter {
+        max-width: 100%;
+        overflow: auto;
+    }
+
+    .table-responsive .dropdown-menu {
+        position: relative;
+    }
+
+    // main header
+    a#il_mhead_t_focus {
+        font-size: 20px
+    }
+
+    h1.ilHeader {
+        padding-top: 5px;
+    }
+
+    // header image
+    #headerimage {
+        width: 35px;
+        height: 35px;
+        margin-top: 2px;
+        margin-right: 7px;
+    }
+
+    /* @import "less/Services/MainMenu/delos_sm.less"; */
+    /* @import "less/Services/UIComponent/Tabs/delos_sm.less"; */
+    /* @import "less/Services/Form/delos_sm.less"; */
+    @import "less/Modules/Forum/delos_sm.less";
+    @import "less/Services/Init/delos_sm.less";
+    @import "less/Services/MainMenu/delos_sm.less";
+    @import "less/Services/COPage/delos_sm.less";
+    @import "less/Services/UIComponent/Button/delos_sm.less";
+    @import "less/Services/News/delos_sm.less";
+
+
+    div.ilGoogleMap {
+        max-width: 100%;
+    }
+
+    /* at last temporary, since it overlaps content */
+    a.ilTreeView, .ilLeftNav {
+        display: none;
+    }
+
+    /* no idea why needed, but this one fixes the drop downs in the small media view (e.g. main menu) */
+    .navbar-nav {
+        margin: 7.5px 0px;
+    }
 }
 
 /* print css */
 @media print {
+    //bootstrap print.less
+    * {
+        text-shadow: none !important;
+        color: black !important; // Black prints faster: h5bp.com/s
+        background: transparent !important;
+        box-shadow: none !important;
+    }
 
-	div.ilTabContentOuter {
-		border: none;
-		box-shadow: none;
-	}
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
 
-	div.ilTabsTable {
-		display: block;
-		width: auto;
-	}
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
 
-	div.ilTabsTableRow {
-		display: block;
-	}
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
 
-	div.ilTabsTableCell {
-		display: block;
-	}
+    // Don't show links for images, or javascript/internal links
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
 
-	div.ilContentFixed {
-		left: 0;
-		position: static;
-	}
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
 
-	[dir="rtl"] div.ilContentFixed {
-		left: auto;
-		right: 0;
-	}
+    thead {
+        display: table-header-group; // h5bp.com/t
+    }
 
-	div.ilFileDropTargetOverlay {
-		display: none;
-	}
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
 
-	.ilTreeView {
-		//display: none;
-	}
+    img {
+        max-width: 100% !important;
+    }
 
-	// overwrite bootstrap href printing
-	a[href]:after {
-		content: "";
-	}
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+
+    // Chrome (OSX) fix for https://github.com/twbs/bootstrap/issues/11245
+    // Once fixed, we can just straight up remove this.
+    select {
+        background: white !important;
+    }
+
+    // Bootstrap components
+    .navbar {
+        display: none;
+    }
+    .table {
+        td,
+        th {
+            background-color: white !important;
+        }
+    }
+    .btn,
+    .dropup > .btn {
+        > .caret {
+            border-top-color: black !important;
+        }
+    }
+    .label {
+        border: 1px solid black;
+    }
+
+    .table {
+        border-collapse: collapse !important;
+    }
+    .table-bordered {
+        th,
+        td {
+            border: 1px solid #ddd !important;
+        }
+    }
+
+    //i also duplicate the selectors  untill the class hidden-print is used
+    #ilTopBar,
+    .osdNotificationContainer,
+    .ilMainHeader,
+    .ilMainMenu,
+    .ilTreeView,
+    .btn,
+    #ilTab,
+    #ilSubTab,
+    #minheight,
+    #ilFooter {
+        display: none;
+    }
+    #mainspacekeeper {
+        padding: 0;
+    }
+    .ilLeftNavSpace {
+        margin-left: 0 !important;
+    }
+    div.ilTabContentOuter {
+        border: none;
+    }
+
+    div.ilFileDropTargetOverlay {
+        display: none;
+    }
+
+    // overwrite bootstrap href printing
+    a[href]:after {
+        content: "";
+    }
 }
 
-
-
-/*
-*  insert CaT
-*  needs to find its place in the less structure
-*/
-
-#mainspacekeeper.container {
-    background-image: url("./Customizing/global/skin/cks_finest/images/login-page-bg.jpg");
-    background-position: 50% 50%;
-    background-size: cover;
-}
-
-/* END insert CaT */
-
-
-
-
-
-/* RTL review overwrite some specifics [bootstrap] styles
- *
- * use class "noMirror" to avoid image flip
-*/

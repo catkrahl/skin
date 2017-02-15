@@ -21,9 +21,10 @@ div.ilPreconditionItem {
 div.ilContainerListItemOuter {
 	padding: 15px 10px;
 	zoom: 1;
-	width: 100%;
-	background-color: rgba(255, 255, 255, .7);
-	border: 1px solid lighten(@mid-gray, 47%);
+	/* background-color: lighten(@mid-gray, 75%); */
+}
+[dir="rtl"] div.ilContainerListItemOuter {
+	display: table;
 }
 div.tblfooter {
 	&.ilContainerListFooter {
@@ -54,11 +55,12 @@ input[name^="position[blocks]"] {
 
 div.ilListItemSection {
 	clear:both;
+    max-width: calc(~"100% - 40px");
 }
 
 div.ilContainerListItemOuterHighlight {
 	padding: 15px;
-	background-color: #FFFFD9;
+	background-color: #ffffd9;
 	zoom: 1;
 }
 
@@ -96,14 +98,15 @@ div.ilContainerListItemIcon a {
 }
 
 div.ilContainerListItemIconCB {
-	margin-left:25px;
+	margin-left: 25px;
 }
 
 [dir="rtl"] div.ilContainerListItemIconCB {
 	margin-left: 0;
-	margin-right:25px;
+	margin-right: 25px;
 }
 
+div[class^="il_editarea"] .ilContainerListItemOuter img,
 img.ilListItemIcon {
 	width: 35px;
 	height: 35px;
@@ -143,9 +146,8 @@ div.il_ContainerListItem {
 }
 
 .ilContainerBlockHeader {
-	/* font-family: 'Open Sans Semibold'; */
-	font-weight: normal;
-	padding: 2px;
+	font-weight: 400;
+	padding: 5px 10px;
 	text-align: left;
 	vertical-align: middle;
 }
