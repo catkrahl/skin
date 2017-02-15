@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<template xmlns="http://www.w3.org" version="1" name="cat">
-	<style name="cat" id="cat" image_directory="images" />
+<template xmlns="http://www.w3.org" version="1" name="custom">
+	<style name="custom" id="custom" image_directory="images" />
 </template>

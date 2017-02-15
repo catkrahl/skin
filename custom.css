@@ -6422,8 +6422,8 @@ body {
   height: 100%;
 }
 #ilAll {
-  background: url("images/login-page-bg.jpg") no-repeat;
-  background-size: 100% 100%;
+  /* background: url("./images/login-page-bg.jpg") no-repeat;
+    background-size: 100% 100%; */
   position: relative;
   height: auto !important;
   min-height: calc(100% - 1px);
@@ -6684,7 +6684,7 @@ body#tinymce {
   width: 700px;
 }
 .ilFixedTopSpacer {
-  padding-top: ;
+  padding-top: 207px;
 }
 .ilFixedTopSpacerBarOnly {
   padding-top: 40px;
