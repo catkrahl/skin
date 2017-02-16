@@ -77,7 +77,7 @@ bdo[dir="rtl"] {
   direction: rtl;
   unicode-bidi: bidi-override;
 }
-/* foo
+/*
 /* rtl-review */
 /* with specifics imports
 add [dir="rtl"] SELECTOR ([dir="ltr"] is default)
