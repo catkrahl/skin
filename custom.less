@@ -8,7 +8,7 @@
 bdo[dir="ltr"] { direction: ltr; unicode-bidi: bidi-override; }
 bdo[dir="rtl"] { direction: rtl; unicode-bidi: bidi-override; }
 
-/*
+/* foo
 /* rtl-review */
 /* with specifics imports
 add [dir="rtl"] SELECTOR ([dir="ltr"] is default)
@@ -18,7 +18,7 @@ All parts that aren't checked yet are actually marked with "rtl-review"
 */
 
 
-@bsbase: "../../Services/UICore/lib/bootstrap-3.2.0/less/";
+@bsbase: "../../../../Services/UICore/lib/bootstrap-3.2.0/less/";
 
 // This part should be a copy of the less/bootstrap.less file
 // containing all imports needed.
@@ -77,7 +77,7 @@ All parts that aren't checked yet are actually marked with "rtl-review"
 @import "@{bsbase}responsive-utilities.less";
 
 // UI framework
-@uibase: "../../src/UI/templates/default/";
+@uibase: "../../../../src/UI/templates/default/";
 @import "@{uibase}Counter/counter.less";
 @import "@{uibase}Glyph/glyph.less";
 @import "@{uibase}Panel/panel.less";
